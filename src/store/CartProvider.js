@@ -35,25 +35,25 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE") {
-    const newItem = state.items
-      .map((meal) => {
-        if (meal.id === action.id && meal.amount !== 1) {
-          return { ...meal, amount: meal.amount - 1 };
-        }
-        if (meal.id === action.id && meal.amount === 1) {
-          return " ";
-        }
-        if (meal.id !== action.id) {
-          return meal;
-        }
-      })
-      .filter((meal) => meal !== " ");
+    console.log(state);
 
-    const updatedTotalAmount = newItem.reduce((acc, current) => {
+    const novoitem = state.items.reduce((acc, current) => {
+      if (current.id === action.id && current.amount !== 1) {
+        return [...acc, { ...current, amount: current.amount - 1 }];
+      }
+      if (current.id === action.id && current.amount === 1) {
+        return [...acc];
+      }
+      if (current.id !== action.id) {
+        return [...acc, current];
+      }
+    }, []);
+
+    const atualizado = novoitem.reduce((acc, current) => {
       return acc + current.amount * current.price;
     }, 0);
 
-    return { items: newItem, totalAmount: updatedTotalAmount };
+    return { items: novoitem, totalAmount: atualizado };
   }
   return defaultCartState;
 };
