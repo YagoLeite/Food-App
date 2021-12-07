@@ -49,7 +49,7 @@ const cartReducer = (state, action) => {
       })
       .filter((meal) => meal !== " ");
 
-    const updatedTotalAmount = state.items.reduce((acc, current) => {
+    const updatedTotalAmount = newItem.reduce((acc, current) => {
       return acc + current.amount * current.price;
     }, 0);
 
