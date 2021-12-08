@@ -35,8 +35,6 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE") {
-    console.log(state);
-
     const novoitem = state.items.reduce((acc, current) => {
       if (current.id === action.id && current.amount !== 1) {
         return [...acc, { ...current, amount: current.amount - 1 }];
@@ -65,8 +63,6 @@ const CartProvider = (props) => {
   );
 
   const addItemHandler = (item) => {
-    console.log(item);
-    console.log(cartState);
     dispatchCartAction({ type: "ADD", item: item });
   };
 
