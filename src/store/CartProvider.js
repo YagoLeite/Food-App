@@ -38,11 +38,9 @@ const cartReducer = (state, action) => {
     const novoitem = state.items.reduce((acc, current) => {
       if (current.id === action.id && current.amount !== 1) {
         return [...acc, { ...current, amount: current.amount - 1 }];
-      }
-      if (current.id === action.id && current.amount === 1) {
+      } else if (current.id === action.id && current.amount === 1) {
         return [...acc];
-      }
-      if (current.id !== action.id) {
+      } else {
         return [...acc, current];
       }
     }, []);
